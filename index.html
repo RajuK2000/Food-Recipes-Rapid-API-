@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu-1</title>
+    <style>
+      body{
+        text-align: center;
+        background-image: url(food1.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      form{
+        text-align: center;
+      }
+         #di1{
+        display: inline-flex;
+        flex-wrap: wrap; 
+        align-items: center; 
+        
+      }
+      #di{
+        border: 3px solid gray;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        height: auto;
+        width:60vh;
+        border-radius: 50px;
+        margin: 10px;
+        box-shadow: 5px 5px 5px;
+      }
+      #di:hover{
+        transform: scale(0.9);
+      }  
+      img{
+        height: 300px;
+        border-radius: 60px;
+      }
+      #btn{
+        
+        font-size: 20px;
+        margin: 10px;
+        border-radius: 20px;
+        height: 50px;
+        background-color: lightblue;
+      }
+      #btn:hover{
+        transform: scale(1.1);
+      }
+      #an{
+        text-decoration: none;
+      }
+      #mq{
+      font-size: 20px;
+      color: darkorange;
+      }
+      #ser{
+        border: 3px solid blue;
+        border-radius: 10px;
+        height:40px; 
+        width:250px;
+        font-size:25px; 
+        opacity: 0.7;
+      }
+      #ser:hover{
+        opacity: 1;
+        background-color: darkgrey;
+      }
+      #sub{
+        border: 2px solid;
+        border-radius:10px; 
+        height:30px; 
+        width:80px;
+        font-size:20px;
+        margin-top:10px;
+        color: black;
+      }
+      #sub:hover{
+        transform: rotate(10deg); scale(1.06); 
+      }
+      #tex{
+        color:darkgray;
+      }
+      #imgg{
+        width: 55vh;
+      }
+    </style>
+</head>
+<body>
+  <marquee id="mq">Note: We have Only three Types of items 1.Fried Rice 2. Chicken soup  3. Juice. Pleace enter without spell mistake.</marquee>
+    <form action="">
+      <input type="search" id="ser" ><br>
+      <input type="submit" id="sub">
+      <button style="border-radius:10px; height:30px; width:80px; font-size:15px;">Next </button>
+      
+    </form>
+
+    <script>
+      
+
+document.forms[0].addEventListener("submit",(f)=>{
+  f.preventDefault()
+  fetch(`https://food-recipes-with-images.p.rapidapi.com/?q=${f.target[0].value}`,
+  {
+    method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '85c39f570bmsh6021967c3278783p1143c2jsnae41703e9b6f',
+    		'X-RapidAPI-Host': 'food-recipes-with-images.p.rapidapi.com'
+    }
+        })
+  .then((val)=>{
+    return val.json()
+  })
+  .then((val)=>{
+    localStorage.setItem("resta",JSON.stringify(val));
+   //window.location.assign("./Res1.html")
+
+
+  })
+
+
+})
+var obj=JSON.parse(localStorage.getItem("resta"));
+
+for(let i=0;i<=4;i++){
+       var a1=document.createElement("span")
+       document.body.appendChild(a1)
+       a1.setAttribute("id","di1")
+       var a=document.createElement("div")
+       a1.appendChild(a)
+       a.setAttribute("id","di")
+
+     var c=document.createElement("h1")
+     a.appendChild(c)
+     c.innerText=obj["d"][i]["Title"];
+     c.setAttribute("id","tex")
+
+     var d=document.createElement("img");
+      a.appendChild(d)
+     d.setAttribute("src",obj["d"][i]["Image"]);
+     d.setAttribute("id","imgg")
+
+     var f=document.createElement("button")
+      a.appendChild(f)
+     f.innerText="Ingrediants"
+     f.setAttribute("id","btn")
+     f.addEventListener("click",()=>{
+      window.location.assign("./ingridiants.html")
+    localStorage.setItem("ing",JSON.stringify(obj.d[i]["Ingredients"]))
+     })
+     
+   }
+   document.forms[0][2].addEventListener("click",()=>{
+    window.location.assign("./page-2.html")
+   })
+  
+
+
+    </script>
+</body>
+</html>

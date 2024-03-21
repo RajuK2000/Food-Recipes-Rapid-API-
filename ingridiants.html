@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingridients</title>
+    <style>
+        body{
+          background-image: url(ingre.jpeg);
+          background-repeat: no-repeat;
+          background-size: cover;
+          border-radius: 20px;
+        }
+        #items{
+            margin-left: 30px;
+            color:bisque;
+            font-size: 20px;
+        }
+        #div1{
+            border:5px solid;
+            display: flex;
+            flex-direction: column;
+            height: auto;
+            width: 700px;
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+             margin-left: 40vh; 
+        }
+        #ing{
+            text-align: center;
+        }
+        @media screen and (min-width: 320px)and (max-width: 640px){
+          #div1{
+            margin-left:0vh ;
+          }  
+        }
+        @media screen and (min-width: 641px)and (max-width: 1024px){
+          #div1{
+            margin-left:12vh ;
+          }  
+        }
+         /* @media screen and (min-width: 1024px)and (max-width: 1400px){
+          #div1{
+            margin-left:22vh ;
+          }  
+        } */
+    </style>
+</head>
+<body>
+    <script>
+        var ingre=JSON.parse(localStorage.getItem("ing"))
+
+      var a=document.createElement("div")
+      document.body.appendChild(a)
+      var c=document.createElement("h1")
+      a.appendChild(c)
+      c.innerText="Ingredients"
+      c.setAttribute("id","ing")
+      a.setAttribute("id","div1")
+     for(i in ingre){
+      var b=document.createElement("p")
+      a.appendChild(b)
+      b.innerText=i+"--> "+ingre[i] 
+      b.setAttribute("id","items") 
+     }
+ 
+      
+    </script>
+</body>
+</html>

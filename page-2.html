@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu-2</title>
+    <style>
+    body{
+      text-align: center;
+      background-image: url(food2.jpg);
+      background-repeat: no-repeat;
+      background-size: cover;
+    } 
+    form{
+        text-align: center;
+        margin: 10px;
+      }
+      #di1{
+        display:inline-flex;
+        flex-wrap: wrap; 
+        align-items: center;
+        justify-content: center;
+        
+      }
+      #di{
+        border: 3px solid gray;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        height: auto;
+        width:60vh;
+        border-radius: 50px;
+        margin: 10px;
+        box-shadow: 5px 5px;
+      } 
+      #di:hover{
+        transform:scale(0.9) ;
+      } 
+      img{
+        height: 300px;
+        border-radius: 60px;
+      }
+      #btn{
+        
+        font-size: 20px;
+        margin: 10px;
+        border-radius: 20px;
+        height: 50px;
+        background-color:lightblue;
+        
+      }
+      #btn:hover{
+        transform: scale(1.1);
+      }
+      #an{
+        text-decoration: none;
+      }
+      .bt1{
+        height: 40px;
+        width: 150px;
+        border-radius:20px;
+        font-size: 20px;
+        color: darkolivegreen;
+        opacity: 0.5;
+        box-shadow: 5px 5px;
+      }
+      .bt1:hover{
+        transform: scale(1.08);
+        opacity: 1;
+        background-color: cornsilk;
+        box-shadow: none;
+       
+      }
+      #tex{
+        color: bisque;
+      }
+      #imgg{
+        width: 55vh;
+      }
+
+    </style>
+</head>
+<body>
+     <form action="" id="btn1">
+     <button class="bt1">Previous Page</button>
+
+     <button class="bt1">Main Page</button>
+
+     <button class="bt1">Next Page</button>
+
+    </form>
+    
+    <script>
+
+      var obj=JSON.parse(localStorage.getItem("resta"));
+     
+      for(let i=5;i<=9;i++){
+       var a1=document.createElement("span")
+       document.body.appendChild(a1)
+       a1.setAttribute("id","di1")
+
+       var a=document.createElement("span")
+        a1.appendChild(a)
+        a.setAttribute("id","di")
+
+      var c=document.createElement("h1")
+      a.appendChild(c)
+      c.innerText=obj["d"][i]["Title"];
+      c.setAttribute("id","tex")
+
+      var d=document.createElement("img");
+       a.appendChild(d)
+      d.setAttribute("src",obj["d"][i]["Image"]);
+      d.setAttribute("id","imgg")
+
+     
+     var f=document.createElement("button")
+      a.appendChild(f)
+    
+     f.innerText="Ingrediants"
+     f.setAttribute("id","btn")
+     f.addEventListener("click",()=>{
+      var obj=JSON.parse(localStorage.getItem("resta"));
+      window.location.assign("./ingridiants.html")
+      localStorage.setItem("ing",JSON.stringify(obj.d[i]["Ingredients"]))
+     })
+      
+    }
+    document.forms[0][0].addEventListener("click",(y)=>{
+      y.preventDefault()
+      alert("OOps Click on MainPage")
+    })
+    document.forms[0][1].addEventListener("click",(x)=>{
+      x.preventDefault()
+      window.location.assign("./index.html")
+    })
+    document.forms[0][2].addEventListener("click",(v)=>{
+      v.preventDefault()
+      window.location.assign("./page-3.html")
+    })
+        
+    </script>
+</body>
+</html>
